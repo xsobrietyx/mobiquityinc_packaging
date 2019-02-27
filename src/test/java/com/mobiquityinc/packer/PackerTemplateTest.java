@@ -24,6 +24,8 @@ import static org.mockito.Mockito.verify;
 
 /**
  * Main test cases holder class.
+ * Method names are refer to the method names of class that covered with tests.
+ * Class name refer to the class that covered with tests.
  */
 @RunWith(MockitoJUnitRunner.class)
 public class PackerTemplateTest {

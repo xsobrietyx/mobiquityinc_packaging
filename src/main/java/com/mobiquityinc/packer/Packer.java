@@ -1,7 +1,7 @@
 package com.mobiquityinc.packer;
 
 /**
- * Created by xsobrietyx on 26-February-2019 time 13:01
+ * Interface that holds some necessary business related constants.
  */
 public interface Packer {
     int MAX_PACKAGE_WEIGHT = 100;

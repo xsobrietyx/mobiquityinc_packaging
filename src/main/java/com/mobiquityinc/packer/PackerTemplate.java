@@ -16,17 +16,28 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Abstract class that should act as Template Method pattern. All methods except pack() could be implemented in another
+ * Abstract class that act as Template Method pattern. All methods except pack() could be implemented in another
  * different manner in the child class(es)
  */
 abstract class PackerTemplate implements Packer {
-    final String pack(String filePath) throws APIException {
-        File file = getFile(filePath);
+    /**
+     * Main processing method, holds all method calls within.
+     * @param fileName name of file with initial data
+     * @return string output returned by {@link com.mobiquityinc.packer.PackerTemplate#getOutput(Map)}
+     * @throws APIException exception related to the wrong initial data format
+     */
+    final String pack(String fileName) throws APIException {
+        File file = getFile(fileName);
         Multimap<String, Item> items = getItems(file);
         Map<String, ArrayList<Item>> packs = processItems(items);
         return getOutput(packs);
     }
 
+    /**
+     * Method that performs mostly string related transformations. Holds all the logic related to the output data fromat.
+     * @param packs map with packages as keys and list of items as items in package
+     * @return string output in proper format
+     */
     String getOutput(Map<String, ArrayList<Item>> packs) {
         StringBuilder result = new StringBuilder();
         for (String s : packs.keySet()) {
@@ -43,6 +54,11 @@ abstract class PackerTemplate implements Packer {
         return result.deleteCharAt(result.toString().length() - 1).reverse().append("\n").toString();
     }
 
+    /**
+     * Main initial processing method that holds the logic related to the initial transformation and exception handling.
+     * @param file initial data as file
+     * @return multimap, where keys is package weight and value is list of items that should be filtered
+     */
     Multimap<String, Item> getItems(File file) {
         Multimap<String, Item> res = TreeMultimap.create();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
@@ -85,6 +101,12 @@ abstract class PackerTemplate implements Packer {
         return res;
     }
 
+    /**
+     * Core processing method that holds business logic implementation.
+     * Filters items that should be packed by item cost and item weight.
+     * @param things multimap from {@link com.mobiquityinc.packer.PackerTemplate#getItems(File)}
+     * @return map with package weights as key and filtered list of items as value
+     */
     Map<String, ArrayList<Item>> processItems(Multimap<String, Item> things) {
 
         Map<String, ArrayList<Item>> result = new LinkedHashMap<>();
@@ -109,9 +131,14 @@ abstract class PackerTemplate implements Packer {
         return result;
     }
 
-    File getFile(String filePath) {
+    /**
+     * Mathod that reads file
+     * @param fileName name of file that should be parsed
+     * @return file object
+     */
+    File getFile(String fileName) {
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
 
-        return new File(Objects.requireNonNull(classloader.getResource(filePath)).getFile());
+        return new File(Objects.requireNonNull(classloader.getResource(fileName)).getFile());
     }
 }
