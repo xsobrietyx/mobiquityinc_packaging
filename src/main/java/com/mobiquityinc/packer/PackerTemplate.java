@@ -34,7 +34,7 @@ abstract class PackerTemplate implements Packer {
     }
 
     /**
-     * Method that performs mostly string related transformations. Holds all the logic related to the output data fromat.
+     * Method that performs mostly string related transformations. Holds all the logic related to the output data format.
      * @param packs map with packages as keys and list of items as items in package
      * @return string output in proper format
      */
