@@ -110,7 +110,7 @@ abstract class PackerTemplate implements Packer {
     Map<String, ArrayList<Item>> processItems(Multimap<String, Item> things) {
 
         Map<String, ArrayList<Item>> result = new LinkedHashMap<>();
-        Set<String> keys = things.keySet();
+        Iterable<String> keys = things.keySet();
 
         for (String key : keys) {
             result.put(key, new ArrayList<>(MAX_ITEMS_AMOUNT));
