@@ -132,7 +132,7 @@ abstract class PackerTemplate implements Packer {
     }
 
     /**
-     * Mathod that reads file
+     * Method that reads file
      * @param fileName name of file that should be parsed
      * @return file object
      */
