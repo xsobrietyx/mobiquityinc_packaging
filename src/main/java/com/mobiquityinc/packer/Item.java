@@ -3,7 +3,7 @@ package com.mobiquityinc.packer;
 import java.util.Objects;
 
 /**
- * Class that serves for data wrapping. Holds some important methods for processing of the data.
+ * Class that serves for data wrapping. Also holds some important methods for data processing.
  */
 class Item implements Comparable<Item> {
     private Integer index;
