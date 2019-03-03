@@ -2,6 +2,7 @@ package com.mobiquityinc.packer;
 
 import com.google.common.collect.Multimap;
 import com.google.common.collect.TreeMultimap;
+import com.mobiquityinc.exception.APIException;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 abstract class PackerTemplate implements Packer {
     /**
      * Main processing method, holds all method calls within.
+     *
      * @param fileName name of file with initial data
      * @return string output returned by {@link com.mobiquityinc.packer.PackerTemplate#getOutput(Map)}
      * @throws APIException exception related to the wrong initial data format
@@ -34,6 +36,7 @@ abstract class PackerTemplate implements Packer {
 
     /**
      * Method that performs mostly string related transformations. Holds all the logic related to the output data format.
+     *
      * @param packs map with packages as keys and list of items as items in package
      * @return string output in proper format
      */
@@ -55,6 +58,7 @@ abstract class PackerTemplate implements Packer {
 
     /**
      * Main initial processing method that holds the logic related to the initial transformation and exception handling.
+     *
      * @param file initial data as file
      * @return multimap, where keys is package weight and value is list of items that should be filtered
      */
@@ -103,6 +107,7 @@ abstract class PackerTemplate implements Packer {
     /**
      * Core processing method that holds business logic implementation.
      * Filters items that should be packed by item cost and item weight.
+     *
      * @param things multimap from {@link com.mobiquityinc.packer.PackerTemplate#getItems(File)}
      * @return map with package weights as key and filtered list of items as value
      */
@@ -132,6 +137,7 @@ abstract class PackerTemplate implements Packer {
 
     /**
      * Method that reads file
+     *
      * @param fileName name of file that should be parsed
      * @return file object
      */

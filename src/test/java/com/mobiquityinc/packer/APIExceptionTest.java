@@ -1,5 +1,6 @@
 package com.mobiquityinc.packer;
 
+import com.mobiquityinc.exception.APIException;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Rule;

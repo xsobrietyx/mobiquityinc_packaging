@@ -1,11 +1,14 @@
 package com.mobiquityinc.packer;
 
+import com.mobiquityinc.exception.APIException;
+
 /**
  * Service class that used to keep signature for the assignment. Also acts as facade.
  */
 public class PackerService {
     /**
      * Main service method
+     *
      * @param filePath file name
      * @return string output
      * @throws APIException business cases related exception
