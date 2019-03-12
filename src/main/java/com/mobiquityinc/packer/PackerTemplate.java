@@ -12,8 +12,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
+
+import static java.lang.Double.parseDouble;
+import static java.lang.Integer.parseInt;
+import static java.lang.Thread.currentThread;
+import static java.util.Objects.requireNonNull;
 
 /**
  * Abstract class that act as Template Method pattern. All methods except pack() could be implemented in another
@@ -70,7 +74,7 @@ abstract class PackerTemplate implements Packer {
                         String[] weightAndRawItems = s.split(":");
                         String weight = weightAndRawItems[0];
 
-                        if (Integer.parseInt(weight.trim()) > MAX_PACKAGE_WEIGHT)
+                        if (parseInt(weight.trim()) > MAX_PACKAGE_WEIGHT)
                             throw new APIException("Package weight limit exceeded.");
 
                         String rawItem = weightAndRawItems[1];
@@ -91,11 +95,11 @@ abstract class PackerTemplate implements Packer {
                                     String itemWeight = itemData[1];
                                     String itemCost = itemData[2].substring(1);
 
-                                    if (Integer.parseInt(itemCost) > MAX_ITEM_COST || Double.parseDouble(itemWeight) > MAX_ITEM_WEIGHT)
+                                    if (parseInt(itemCost) > MAX_ITEM_COST || parseDouble(itemWeight) > MAX_ITEM_WEIGHT)
                                         throw new APIException("Item constraints not valid. Please check item weight and/or cost");
-                                    return new Item(Integer.parseInt(itemData[0]),
-                                            Double.parseDouble(itemWeight),
-                                            Integer.parseInt(itemCost));
+                                    return new Item(parseInt(itemData[0]),
+                                            parseDouble(itemWeight),
+                                            parseInt(itemCost));
                                 }).collect(Collectors.toList()));
                     });
         } catch (IOException e) {
@@ -125,7 +129,7 @@ abstract class PackerTemplate implements Packer {
                 Item entryValue = entry.getValue();
                 if ((Arrays.stream(integers.toArray())
                         .mapToDouble(value ->
-                                ((Item) value).getWeight()).sum() + entryValue.getWeight()) < Integer.parseInt(entry.getKey().trim())) {
+                                ((Item) value).getWeight()).sum() + entryValue.getWeight()) < parseInt(entry.getKey().trim())) {
                     integers.add(entryValue);
                 }
                 return integers;
@@ -142,8 +146,8 @@ abstract class PackerTemplate implements Packer {
      * @return file object
      */
     File getFile(String fileName) {
-        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        ClassLoader classloader = currentThread().getContextClassLoader();
 
-        return new File(Objects.requireNonNull(classloader.getResource(fileName)).getFile());
+        return new File(requireNonNull(classloader.getResource(fileName)).getFile());
     }
 }
