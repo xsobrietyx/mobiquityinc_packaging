@@ -1,6 +1,7 @@
 package com.mobiquityinc.packer;
 
 import com.google.common.collect.Multimap;
+import com.google.common.collect.TreeMultimap;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,8 +14,8 @@ import java.util.Collections;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyMap;
@@ -50,7 +51,7 @@ public class PackerTemplateTest {
         Multimap<String, Item> items = packerTemplate.getItems(file);
 
         assertNotNull(items);
-        assertNotSame(Collections.emptyList(), items);
+        assertNotEquals(Collections.emptyMap(), items.asMap());
         assertEquals(items.size(), 25);
     }
 
