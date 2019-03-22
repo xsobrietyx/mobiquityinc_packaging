@@ -23,7 +23,7 @@ import static java.util.Objects.requireNonNull;
  * Abstract class that act as Template Method pattern. All methods except pack() could be implemented in another
  * different manner in the child class(es)
  */
-abstract class PackerTemplate implements Packer {
+abstract class PackerTemplate implements PackerConstants {
     /**
      * Main processing method, holds all method calls within.
      *
