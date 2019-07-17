@@ -1,0 +1,4 @@
+wrongPackageWeight.txt | Package weight limit exceeded.
+wrongItemCost.txt | Item constraints
+wrongItemWeight.txt | Item constraints
+wrongItemsCount.txt | Items count limit exceeded.

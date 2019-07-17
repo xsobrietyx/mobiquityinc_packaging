@@ -1,8 +1,8 @@
 package com.mobiquityinc.packer;
 
 import com.mobiquityinc.exception.APIException;
+import junitparams.FileParameters;
 import junitparams.JUnitParamsRunner;
-import junitparams.Parameters;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -21,20 +21,14 @@ public class APIExceptionTest {
     private PackerTemplate packerTemplate = new DefaultPacker();
 
     @Test(expected = APIException.class)
-    @Parameters({"wrongItemCost.txt",
-            "wrongItemsCount.txt",
-            "wrongItemWeight.txt",
-            "wrongPackageWeight.txt"})
+    @FileParameters("src/test/resources/fileNames.csv")
     public void testAllCasesExceptionThrown(String fileName) {
         File file = packerTemplate.getFile(fileName);
         packerTemplate.getItems(file);
     }
 
     @Test
-    @Parameters({"wrongPackageWeight.txt | Package weight limit exceeded.",
-            "wrongItemCost.txt | Item constraints",
-            "wrongItemWeight.txt | Item constraints",
-            "wrongItemsCount.txt | Items count limit exceeded."})
+    @FileParameters("src/test/resources/fileNamesToMessages.csv")
     public void testAllCasesCorrectExceptionMessageThrown(String fileName, String exceptionMessage) {
         expectedException.expect(APIException.class);
         expectedException.expectMessage(exceptionMessage);
