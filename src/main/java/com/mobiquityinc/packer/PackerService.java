@@ -6,6 +6,9 @@ import com.mobiquityinc.exception.APIException;
  * Service class that used to keep signature for the assignment. Also acts as facade.
  */
 public class PackerService {
+
+    private static final PackerTemplate packer = new DefaultPacker();
+
     /**
      * Main service method
      *
@@ -14,7 +17,6 @@ public class PackerService {
      * @throws APIException business cases related exception
      */
     public static String performPackaging(String filePath) throws APIException {
-        DefaultPacker p = new DefaultPacker();
-        return p.pack(filePath);
+        return packer.pack(filePath);
     }
 }
