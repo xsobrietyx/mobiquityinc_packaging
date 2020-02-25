@@ -14,6 +14,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static com.mobiquityinc.packer.PackerConstants.MAX_ITEMS_AMOUNT;
+import static com.mobiquityinc.packer.PackerConstants.MAX_ITEM_COST;
+import static com.mobiquityinc.packer.PackerConstants.MAX_ITEM_WEIGHT;
+import static com.mobiquityinc.packer.PackerConstants.MAX_PACKAGE_WEIGHT;
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 import static java.lang.Thread.currentThread;
@@ -23,7 +27,7 @@ import static java.util.Objects.requireNonNull;
  * Abstract class that act as Template Method pattern. All methods except pack() could be implemented in another
  * different manner in the child class(es)
  */
-abstract class PackerTemplate implements PackerConstants {
+abstract class PackerTemplate {
     /**
      * Main processing method, holds all method calls within.
      *
